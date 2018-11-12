@@ -24,3 +24,11 @@ If anyone likes to copy this code to their Unity Mod Manager / Kingmaker Mod Loa
 This mod uses patchwork  https://github.com/GregRos/Patchwork, i dont have time to convert it to a Unity Mod Manager Mod currently.
 
 If anyone from Owlcat finds this mod, feel free to copy my code into the game or change how you like, maybe add an option to use a FolderSaver or ZipSaver
+
+
+## SavegameCleanerMod
+
+- Remove dead units without loot from the area file
+- Clear the statistic.json file
+- Remove dead summons from the party.json
+- Remove pets without master from the party.json
