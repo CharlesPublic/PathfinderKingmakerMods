@@ -227,7 +227,7 @@ namespace MyMod.Mods
         /// <summary>
         /// Instead of calling AreaDataStash.ClearAll (clear area folder), 
         /// we only wanna remove files from areas folder that are not in the SaveGame.
-        ///  We call our RemoveAllFilesNotInSaveGame in the ctor of ThreadedGameLoader2
+        ///  We call our RemoveAllFilesNotInSaveGame in the ctor of ThreadedGameLoader
         ///  TODO: There is probably a better place where to do this, instead of in the ctor...
         /// </summary>
         /// <param name="m_SaveInfo"></param>
