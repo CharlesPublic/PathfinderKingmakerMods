@@ -30,7 +30,10 @@ If anyone from Owlcat finds this mod, feel free to copy my code into the game or
 
 - Remove dead units without loot from the area file
 - Clear the statistic.json file
-- Remove dead summons from the party.json 
+- Remove dead summons from the party.json
 - Remove pets without master from the party.json (minor impact)
 
-One unit gets serialized into up to 10000 lines of json code, so its important that we clear all units form the save files that are no longer needed. This improves saving and loading times. My party.json had 400 dead summons in there and dropped from 30MB to 3MB with this fix. My Loading times improved by at least 5 sec.
+One unit gets serialized into up to 10000 lines of json code, so its important that we clear all units form the save files that are no longer needed. This improves saving and loading times. 
+
+It seems every time you summon in the game, that unit gets added to the party.json and sometimes gets not removed.
+My party.json had over 400 dead, NoInGame summons in there and dropped from 30MB to 3MB with this fix. My Loading times improved by at least 5 sec.
