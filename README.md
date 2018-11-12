@@ -28,7 +28,7 @@ If anyone from Owlcat finds this mod, feel free to copy my code into the game or
 
 ## SavegameCleanerMod
 
-- Remove dead units without loot from the area file
-- Clear the statistic.json file
-- Remove dead summons from the party.json
-- Remove pets without master from the party.json
+- Remove dead units without loot from the area file (one unit is up to 10000 lines of json, faster loading and saving times)
+- Clear the statistic.json file (faster loading times)
+- Remove dead summons from the party.json (my party.json dropped from 30MB to 3MB when i first did this and reduced loading and saving  times by 5 sec)
+- Remove pets without master from the party.json (minor impact)
