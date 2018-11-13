@@ -1,4 +1,4 @@
-﻿using Kingmaker;
+using Kingmaker;
 using Kingmaker.Blueprints.Area;
 using Kingmaker.EntitySystem.Persistence;
 using Kingmaker.EntitySystem.Persistence.SavesStorage;
@@ -70,25 +70,16 @@ namespace MyMod.Mods
             try
             {
 
-                // TODO: fix 
-                // i used reflection here because i found no easy way to reference the internal class FolderSaver,
-                var folderSaverType = typeof(SaveManager)
-                                      .Assembly.GetType("Kingmaker.EntitySystem.Persistence.FolderSaver");
 
                 if (save.FolderName.EndsWith(".zks") || save.Saver == null ||
-                    save.Saver.GetType() != folderSaverType)
+                    save.Saver.GetType() != typeof(FolderSaver2))
                 {
 
                     // set folderName, (remove file extension)
                     save.FolderName = save.FolderName.Replace(".zks", "");
 
-                    var constr1 = folderSaverType.GetConstructors
-                            (BindingFlags.Instance | BindingFlags.Public)[0];
-                    var o = constr1.Invoke(new object[] { save.FolderName }); // new FolderSaver(save.FolderName);
-
                     //save.Saver = new FolderSaver(save.FolderName);
-                    save.Saver = (ISaver)o;
-                    
+                    save.Saver =  ((ISaver)new FolderSaver2(save.FolderName));
 
                     if (save.Type == SaveInfo.SaveType.Quick)
                     {
@@ -227,7 +218,7 @@ namespace MyMod.Mods
         /// <summary>
         /// Instead of calling AreaDataStash.ClearAll (clear area folder), 
         /// we only wanna remove files from areas folder that are not in the SaveGame.
-        ///  We call our RemoveAllFilesNotInSaveGame in the ctor of ThreadedGameLoader
+        ///  We call our RemoveAllFilesNotInSaveGame in the ctor of ThreadedGameLoader2
         ///  TODO: There is probably a better place where to do this, instead of in the ctor...
         /// </summary>
         /// <param name="m_SaveInfo"></param>
@@ -264,6 +255,14 @@ namespace MyMod.Mods
     [ModifiesType("Kingmaker.EntitySystem.Persistence.FolderSaver")]
     public class FolderSaver2
     {
+
+
+        [ModifiesMember(".ctor", ModificationScope.Accessibility)]
+        public FolderSaver2(string folderName)
+        {
+
+        }
+
 
         [ModifiesMember("m_FolderName", ModificationScope.Accessibility)]
         private readonly string m_FolderName; // reference to FolderSaver.m_FolderName
