@@ -69,12 +69,9 @@ namespace MyMod.Mods
 
             try
             {
-
-
                 if (save.FolderName.EndsWith(".zks") || save.Saver == null ||
                     save.Saver.GetType() != typeof(FolderSaver2))
                 {
-
                     // set folderName, (remove file extension)
                     save.FolderName = save.FolderName.Replace(".zks", "");
 
@@ -87,7 +84,6 @@ namespace MyMod.Mods
                         // save.Name = Path.GetFileName(save.FolderName);
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -426,13 +422,8 @@ namespace MyMod.Mods
         {
             // we cleared the body
 
-            /// Alternative: Remove units completely after they contain no more loot:
-
-            /// foreach (var allSceneState in Game.Instance.CurrentScene.GetAllSceneStates())
-            /// foreach (var allEntityData in allSceneState.AllEntityData)
-            /// if (allEntityData is UnitEntityData unit)
-            /// if (unit.IsRevealed &&  unit.Descriptor.State.IsFinallyDead && ! unit.IsDeadAndHasLoot)
-            /// allSceneState.RemoveEntityData(allEntityData); allEntityData?.destroy();
+            /// Alternative: Remove units completely after they contain no more loot.
+            /// See: SaveGameCleaner2.CleanUpSavegame_AreaUnits();
         }
     }
 
