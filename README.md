@@ -3,9 +3,7 @@ My Collection of Pathfinder Kingmaker Mods
 
 ## FolderSaverMod:
 
-### -- Currently Broken, need to update for new Patch -- 
-
-Every time a savegame is loaded the Areas folder is cleared (AppData\LocalLow\Owlcat Games\Pathfinder Kingmaker\Areas).  
+Every time a savegame is loaded the Areas folder is cleared (AppData/Local/Temp/Owlcat Games/Pathfinder Kingmaker\Areas).  
 Then all files from the save zip file, including up to 200 areas are extracted and copied to the area folder. (up to 200MB?).  
 This obviously scales horribly as you progress in the game or keep loading a Game in the same area.
 
