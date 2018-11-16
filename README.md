@@ -28,6 +28,8 @@ If anyone from Owlcat finds this mod, feel free to copy my code into the game or
 
 ## SavegameCleanerMod
 
+### Currently Broken, need to update for new Patch
+
 - Remove dead units without loot from the area file
 - Clear the statistic.json file
 - Remove dead summons from the party.json
