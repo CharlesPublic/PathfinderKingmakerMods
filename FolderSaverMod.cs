@@ -183,6 +183,10 @@ namespace MyMod.Mods
         [ModifiesMember("m_SaveInfo", ModificationScope.Accessibility)]
         private readonly SaveInfo m_SaveInfo; // reference to ThreadedGameLoader.m_SaveInfo
 
+        [ModifiesMember("m_IsSmokeTest", ModificationScope.Accessibility)]
+        private readonly bool m_IsSmokeTest;
+
+
         /// <summary>
         /// we remove all files from areas Folder that are not in the SaveGame
         /// </summary>
@@ -219,9 +223,11 @@ namespace MyMod.Mods
         /// </summary>
         /// <param name="m_SaveInfo"></param>
         [ModifiesMember(".ctor", ModificationScope.Body)]
-        public ThreadedGameLoader2(SaveInfo m_SaveInfo)
+        public ThreadedGameLoader2(SaveInfo m_SaveInfo, bool isSmokeTest)
         {
             this.m_SaveInfo = m_SaveInfo;
+            this.m_IsSmokeTest = isSmokeTest;
+
 
             try
             {
