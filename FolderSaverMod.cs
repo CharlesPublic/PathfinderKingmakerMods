@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 /// <summary>
-/// When a savegame is loaded the Areas folder is cleared (AppData\LocalLow\Owlcat Games\Pathfinder Kingmaker\Areas).
+/// When a savegame is loaded the Areas folder is cleared (AppData/Local/Temp/Owlcat Games/Pathfinder Kingmaker\Areas).
 /// Also all files from the save zip file, including 200 areas are extracted and copied to the area folder. (up to 200MB?)
 /// This obviously scales horribly as you progress in the game or keep loading a Game in the same area.
 /// 
@@ -122,6 +122,15 @@ namespace MyMod.Mods
             // We cleared the body
         }
 
+        [NewMember]
+        public static string GetAreasFolder()
+        {
+            // TODO: replace folder dividers
+            var areasFolder = Path.Combine(Application.temporaryCachePath, "Areas");
+           // BattleLogHelper.AddEntry($"areas {areasFolder}");
+
+            return areasFolder;
+        }
 
         /// <summary>
         /// This clears the Areas Folder
@@ -131,14 +140,13 @@ namespace MyMod.Mods
         public static void ClearAll2()
         {
 
-            var areasFolder = Path.Combine(Application.persistentDataPath, "Areas");
+            var areasFolder = GetAreasFolder();
             BattleLogHelper.LogDebug($"try to delete : {areasFolder}");
 
             if (Directory.Exists(areasFolder))
             {
-                // AppData/LocalLow/Owlcat Games/Pathfinder Kingmaker\Areas
                 // remove this "security check" if you dont need it
-                if (areasFolder.Contains(@"AppData/LocalLow/Owlcat Games/Pathfinder Kingmaker\Areas"))
+                if (areasFolder.Contains(@"AppData/Local/Temp/Owlcat Games/Pathfinder Kingmaker\Areas"))
                 {
                     Directory.Delete(areasFolder, true);
                     BattleLogHelper.LogDebug($"deleted : {areasFolder}");
@@ -198,7 +206,7 @@ namespace MyMod.Mods
             var allFiles = m_SaveInfo.Saver.GetAllFiles();
             var saveContentsDic = new HashSet<string>(allFiles);
 
-            var areasFolder = Path.Combine(Application.persistentDataPath, "Areas");
+            var areasFolder = AreaDataStash2.GetAreasFolder();
             Directory.CreateDirectory(areasFolder); // create if not exists
 
             // remove all files not in save
@@ -227,7 +235,6 @@ namespace MyMod.Mods
         {
             this.m_SaveInfo = m_SaveInfo;
             this.m_IsSmokeTest = isSmokeTest;
-
 
             try
             {
@@ -287,9 +294,9 @@ namespace MyMod.Mods
         public void CopyToStash(string fileName)
         {
             // m_FolderName: ...AppData\LocalLow\Owlcat Games\Pathfinder Kingmaker\Saved Games
-            // areas folder: ...AppData\LocalLow\Owlcat Games\Pathfinder Kingmaker\Areas
+            // areas folder: ...AppData/Local/Temp/Owlcat Games/Pathfinder Kingmaker\Areas
 
-            var areasFolder = Path.Combine(Application.persistentDataPath, "Areas");
+            var areasFolder = AreaDataStash2.GetAreasFolder();
 
             var saveGameFile = Path.Combine(m_FolderName, fileName);
             var destination = Path.Combine(areasFolder, fileName);
@@ -333,8 +340,8 @@ namespace MyMod.Mods
 
             try
             {
-                var areaDataStashFolder = Path.Combine(Application.persistentDataPath, "Areas");
-                string fileToCopy = Path.Combine(areaDataStashFolder, fileName);
+                var areasFolder = AreaDataStash2.GetAreasFolder();
+                string fileToCopy = Path.Combine(areasFolder, fileName);
 
                 // this check is missing in the FolderSaver.CopyFromStash
                 if (File.Exists(fileToCopy))
