@@ -126,7 +126,11 @@ namespace MyMod.Mods
         public static string GetAreasFolder()
         {
             // TODO: replace folder dividers
-            var areasFolder = Path.Combine(Application.temporaryCachePath, "Areas");
+
+            //var areasFolder = Path.Combine(Application.temporaryCachePath, "Areas");
+            var areasFolder = Path.Combine(ApplicationPaths.persistentDataPath, "Areas");
+            
+            
            // BattleLogHelper.AddEntry($"areas {areasFolder}");
 
             return areasFolder;
@@ -146,7 +150,10 @@ namespace MyMod.Mods
             if (Directory.Exists(areasFolder))
             {
                 // remove this "security check" if you dont need it
-                if (areasFolder.Contains(@"AppData/Local/Temp/Owlcat Games/Pathfinder Kingmaker\Areas"))
+
+                // AppData/LocalLow/Owlcat Games/Pathfinder Kingmaker
+                // AppData/Local/Temp/Owlcat Games/Pathfinder Kingmaker
+                if (areasFolder.Contains(@"AppData/LocalLow/Owlcat Games/Pathfinder Kingmaker\Areas"))
                 {
                     Directory.Delete(areasFolder, true);
                     BattleLogHelper.LogDebug($"deleted : {areasFolder}");
@@ -179,6 +186,10 @@ namespace MyMod.Mods
             AreaDataStash2.ClearAll2(); // will call AreaDataStash.ClearAll2();
             LoadNewGameB(preset);
         }
+
+
+        [ModifiesMember("m_SceneLoader", ModificationScope.Accessibility)]
+        public readonly SceneLoader m_SceneLoader;
 
 
     }
