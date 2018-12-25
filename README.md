@@ -1,7 +1,7 @@
 # PathfinderKingmakerMods
 My Collection of Pathfinder Kingmaker Mods
 
-## FolderSaverMod:
+## FolderSaverMod: (Updated for Patch 1.1.5)
 
 Every time a savegame is loaded the Areas folder is cleared  
 (AppData/Local/Temp/Owlcat Games/Pathfinder Kingmaker\Areas).  
